@@ -12,6 +12,9 @@ import {
 } from "reactstrap";
 import PanelHeader from "components/PanelHeader/PanelHeader.js";
 import Banco from "components/Banco.js";
+import Cartao from "components/Cartao";
+import Renda from "components/Transacoes/Renda.js";
+import Despesa from "components/Transacoes/Despesa";
 
 function Home() {
   const notificationAlert = React.useRef();
@@ -73,43 +76,7 @@ function Home() {
             <Banco />
           </Col>
           <Col md={6} xs={12}>
-            <Card>
-              <CardHeader>
-                <CardTitle tag="h4">Notification states</CardTitle>
-              </CardHeader>
-              <CardBody>
-                <Alert color="primary" isOpen={true} toggle={() => {}}>
-                  <span>
-                    <b> Primary - </b> This is a regular notification made with
-                    color="primary"
-                  </span>
-                </Alert>
-                <Alert color="info" isOpen={true} toggle={() => {}}>
-                  <span>
-                    <b> Info - </b> This is a regular notification made with
-                    color="info"
-                  </span>
-                </Alert>
-                <Alert color="success" isOpen={true} toggle={() => {}}>
-                  <span>
-                    <b> Success - </b> This is a regular notification made with
-                    color="success"
-                  </span>
-                </Alert>
-                <Alert color="warning" isOpen={true} toggle={() => {}}>
-                  <span>
-                    <b> Warning - </b> This is a regular notification made with
-                    color="warning"
-                  </span>
-                </Alert>
-                <Alert color="danger" isOpen={true} toggle={() => {}}>
-                  <span>
-                    <b> Danger - </b> This is a regular notification made with
-                    color="danger"
-                  </span>
-                </Alert>
-              </CardBody>
-            </Card>
+            <Cartao />
           </Col>
           <Col md={12} xs={12}>
             <Card>
@@ -118,75 +85,16 @@ function Home() {
                   <Row>
                     <Col md={6} className="ml-auto mr-auto text-center">
                       <CardTitle tag="h4">
-                        Notifications Places
-                        <p className="category">Click to view notifications</p>
+                            Transações
                       </CardTitle>
                     </Col>
                   </Row>
                   <Row>
-                    <Col lg={8} xs={12} className="ml-auto mr-auto">
-                      <Row>
-                        <Col md={4} xs={12}>
-                          <Button
-                            color="primary"
-                            block
-                            onClick={() => notify("tl")}
-                          >
-                            Top Left
-                          </Button>
-                        </Col>
-                        <Col md={4} xs={12}>
-                          <Button
-                            color="primary"
-                            block
-                            onClick={() => notify("tc")}
-                          >
-                            Top Center
-                          </Button>
-                        </Col>
-                        <Col md={4} xs={12}>
-                          <Button
-                            color="primary"
-                            block
-                            onClick={() => notify("tr")}
-                          >
-                            Top Right
-                          </Button>
-                        </Col>
-                      </Row>
+                    <Col md={6} xs={12}>
+                        <Renda />
                     </Col>
-                  </Row>
-                  <Row>
-                    <Col lg={8} xs={12} className="ml-auto mr-auto">
-                      <Row>
-                        <Col md={4} xs={12}>
-                          <Button
-                            color="primary"
-                            block
-                            onClick={() => notify("bl")}
-                          >
-                            Bottom Left
-                          </Button>
-                        </Col>
-                        <Col md={4} xs={12}>
-                          <Button
-                            color="primary"
-                            block
-                            onClick={() => notify("bc")}
-                          >
-                            Bottom Center
-                          </Button>
-                        </Col>
-                        <Col md={4} xs={12}>
-                          <Button
-                            color="primary"
-                            block
-                            onClick={() => notify("br")}
-                          >
-                            Bottom Right
-                          </Button>
-                        </Col>
-                      </Row>
+                    <Col md={6} xs={12}>
+                        <Despesa />
                     </Col>
                   </Row>
                 </div>

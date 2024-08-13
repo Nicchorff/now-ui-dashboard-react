@@ -27,7 +27,7 @@ import {
   dashboard24HoursPerformanceChart,
 } from "variables/charts.js";
 
-const renderBancos = () => {
+const renderCartoes = () => {
     return (
         <Col md={6} xs={12}>
             <Card>
@@ -62,11 +62,11 @@ const renderBancos = () => {
     );
 }
 
-function Banco() {
+function Cartao() {
   return (
     <Card className="card-chart">
         <CardHeader>
-            <CardTitle tag="h4">Bancos</CardTitle>
+            <CardTitle tag="h4">Cartões</CardTitle>
             <UncontrolledDropdown>
                 <Button
                     className=" btn-icon"
@@ -78,14 +78,14 @@ function Banco() {
         </CardHeader>
         <CardBody>
             <Row>
-                {renderBancos()}
-                {renderBancos()}
-                {renderBancos()}
-                {renderBancos()}
+                {renderCartoes()}
+                {renderCartoes()}
+                {renderCartoes()}
+                {renderCartoes()}
             </Row>
         </CardBody>
     </Card>
   );
 }
 
-export default Banco;
+export default Cartao;
