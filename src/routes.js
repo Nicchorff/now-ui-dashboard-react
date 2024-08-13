@@ -23,6 +23,7 @@ import TableList from "views/TableList.js";
 import Maps from "views/Maps.js";
 import Upgrade from "views/Upgrade.js";
 import UserPage from "views/UserPage.js";
+import Home from "views/Home.js";
 
 var dashRoutes = [
   {
@@ -80,6 +81,13 @@ var dashRoutes = [
     name: "Upgrade to PRO",
     icon: "objects_spaceship",
     component: <Upgrade />,
+    layout: "/admin",
+  },
+  {
+    path: "/home",
+    name: "Home",
+    icon: "location_world",
+    component: <Home />,
     layout: "/admin",
   },
 ];
