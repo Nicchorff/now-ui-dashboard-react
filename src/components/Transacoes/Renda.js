@@ -1,102 +1,97 @@
-import React from "react";
-import { Line, Bar } from "react-chartjs-2";
+import React, { useEffect, useState } from 'react';
 import {
   Card,
   CardHeader,
   CardBody,
-  CardFooter,
   CardTitle,
-  Row,
-  Col,
   UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
   Table,
   Button,
-  Label,
-  FormGroup,
-  Input,
   UncontrolledTooltip,
 } from "reactstrap";
-import PanelHeader from "components/PanelHeader/PanelHeader.js";
-import {
-  dashboardPanelChart,
-  dashboardShippedProductsChart,
-  dashboardAllProductsChart,
-  dashboard24HoursPerformanceChart,
-} from "variables/charts.js";
 
-const renderRendas = () => {
+const Renda = ({ idUsuario }) => {
+    
+    const [transacoes, setTransacoes] = useState([]);
+    idUsuario = "cedcec96-40eb-4b10-a88e-13eba9c8f233";
+
+    useEffect(() => {
+        fetch(`https://localhost:7022/api/transacao/usuario?idUsuario=${idUsuario}`)
+            .then(response => response.json())
+            .then(data => {
+                const rendas = data.filter(element => element.tipoTransacao === 2);
+                setTransacoes(rendas);
+                console.log(rendas);
+            })
+            .catch(error => console.error('Erro ao buscar dados:', error));
+    }, [idUsuario]);
+
     return (
-        <Table responsive>
-            <thead className="text-primary">
-                <tr>
-                    <th>Descrição</th>
-                    <th>Valor</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Salario </td>
-                    <td>R$ 1.000,00</td>
-                    <td>01/01/2021</td>
-                    <td className="td-actions text-right">
-                        <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="default"
-                            id="tooltip731609871"
-                            type="button"
+        <Card className="card-chart">
+            <CardHeader>
+                <CardTitle tag="h4">Rendas</CardTitle>
+                <UncontrolledDropdown>
+                    <Button
+                        className=" btn-icon"
+                        color="info"
                         >
-                            <i className="now-ui-icons business_bulb-63" />
-                        </Button>
-                        <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip731609871"
-                        >
-                            Mais Detalhes
-                        </UncontrolledTooltip>
-                        <Button
-                            className="btn-round btn-icon btn-icon-mini btn-neutral"
-                            color="info"
-                            id="tooltip923217206"
-                            type="button"
-                        >
-                            <i className="now-ui-icons ui-2_settings-90" />
-                        </Button>
-                        <UncontrolledTooltip
-                            delay={0}
-                            target="tooltip923217206"
-                        >
-                            Editar
-                        </UncontrolledTooltip>
-                    </td>
-                </tr>
-            </tbody>
-        </Table>
+                        <i className="now-ui-icons ui-1_simple-add" />
+                    </Button>
+                </UncontrolledDropdown>
+            </CardHeader>
+            <CardBody>
+                <Table responsive>
+                    <thead className="text-primary">
+                        <tr>
+                            <th>Descrição</th>
+                            <th>Valor</th>
+                            <th>Data</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {transacoes.map(transacao => (
+                            <tr key={transacao.id}>
+                                <td>{transacao.descricao}</td>
+                                <td>R$ {transacao.valor.toFixed(2)}</td>
+                                <td>{new Date(transacao.data).toLocaleDateString()}</td>
+                                <td className="td-actions text-right">
+                                    <Button
+                                        className="btn-round btn-icon btn-icon-mini btn-neutral"
+                                        color="default"
+                                        id={`tooltip${transacao.id}1`}
+                                        type="button"
+                                    >
+                                        <i className="now-ui-icons business_bulb-63" />
+                                    </Button>
+                                    <UncontrolledTooltip
+                                        delay={0}
+                                        target={`tooltip${transacao.id}1`}
+                                    >
+                                        Mais Detalhes
+                                    </UncontrolledTooltip>
+                                    <Button
+                                        className="btn-round btn-icon btn-icon-mini btn-neutral"
+                                        color="info"
+                                        id={`tooltip${transacao.id}2`}
+                                        type="button"
+                                    >
+                                        <i className="now-ui-icons ui-2_settings-90" />
+                                    </Button>
+                                    <UncontrolledTooltip
+                                        delay={0}
+                                        target={`tooltip${transacao.id}2`}
+                                    >
+                                        Editar
+                                    </UncontrolledTooltip>
+                                </td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            </CardBody>
+        </Card>
+        
     );
-}
-
-function Renda() {
-  return (
-    <Card className="card-chart">
-        <CardHeader>
-            <CardTitle tag="h4">Rendas</CardTitle>
-            <UncontrolledDropdown>
-                <Button
-                    className=" btn-icon"
-                    color="info"
-                    >
-                    <i className="now-ui-icons ui-1_simple-add" />
-                </Button>
-            </UncontrolledDropdown>
-        </CardHeader>
-        <CardBody>
-            {renderRendas()}
-        </CardBody>
-    </Card>
-  );
-}
+};
 
 export default Renda;
